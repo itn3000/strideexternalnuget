@@ -38,3 +38,27 @@ The Stride game project which has `PackageReference` to ExternalPackage1
 ## ref by project
 
 ![ref by project](component-list-refbyproject.png)
+
+# Resolution
+
+1. add `Stride.Core.ModuleInitializerAttribute` to some public void static method in nuget package project
+2. do `Stride.Core.Reflection.AssemblyRegistry.Register(Assembly asm, AssemblyCommonCategories category)` in static method
+
+here is example code
+
+```csharp
+using System.Reflection;
+using Stride.Core;
+using Stride.Core.Reflection;
+
+namespace ExternalPackage1;
+
+internal class Module
+{
+    [ModuleInitializer]
+    public static void InitializeModule()
+    {
+        AssemblyRegistry.Register(typeof(Module).GetTypeInfo().Assembly, AssemblyCommonCategories.Assets);
+    }
+}
+```
