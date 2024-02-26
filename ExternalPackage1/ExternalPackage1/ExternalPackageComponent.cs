@@ -13,6 +13,7 @@ namespace ExternalPackage1
     [ComponentCategory("ExternalPackage")]
     [Display("External Package Component")]
     [DefaultEntityComponentProcessor(typeof(ExternalPackageProcessor))]
+    [DataContract]
     public class ExternalPackageComponent: EntityComponent
     {
         public int Value1 { get; set; }
